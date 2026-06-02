@@ -48,7 +48,7 @@ pip install torch torchvision \
 
 ## Installation — Enterprise Repository
 
-If your network requires routing through an enterprise PyPI mirror (e.g. `https://repo-python.prod.adp.fr/root/pypi`), apply one of the two options below.
+If your network requires routing through an enterprise PyPI mirror (e.g. `https://your-enterprise-mirror.example.com/pypi`), apply one of the two options below.
 
 ### Option A — Enterprise mirror only
 
@@ -56,13 +56,13 @@ Use this when the mirror already hosts the correct GPU wheels for both packages.
 
 ```bash
 sudo -u app -H bash -lc '
-cd /srv/applications/app-n1960-api/bin &&
+cd /path/to/your/application &&
 source .venv/bin/activate &&
 mkdir -p .tmp .cache &&
 TMPDIR=$(pwd)/.tmp \
 pip install \
   --cache-dir $(pwd)/.cache \
-  --index-url https://repo-python.prod.adp.fr/root/pypi \
+  --index-url https://your-enterprise-mirror.example.com/pypi \
   "tensorflow==2.15.*" torch torchvision
 '
 ```
@@ -73,13 +73,13 @@ Use this when the mirror does not host PyTorch GPU wheels. `pip` will prefer the
 
 ```bash
 sudo -u app -H bash -lc '
-cd /srv/applications/app-n1960-api/bin &&
+cd /path/to/your/application &&
 source .venv/bin/activate &&
 mkdir -p .tmp .cache &&
 TMPDIR=$(pwd)/.tmp \
 pip install \
   --cache-dir $(pwd)/.cache \
-  --index-url  https://repo-python.prod.adp.fr/root/pypi \
+  --index-url  https://your-enterprise-mirror.example.com/pypi \
   --extra-index-url https://download.pytorch.org/whl/cu121 \
   "tensorflow==2.15.*" torch torchvision
 '
